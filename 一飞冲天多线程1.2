@@ -1,0 +1,77 @@
+timeout=1
+count=0
+chenggong = 0
+shuaxin = 0
+current=location.href;
+if(timeout>0){
+	
+//t1-tN是线程现在是几个线程自己看看
+var t1 = window.setInterval("jiuka()",1000*timeout);
+var t2 = window.setInterval("jiuka()",1500*timeout);
+var t3 = window.setInterval("jiuka1()",2200*timeout);
+var t4 = window.setInterval("jiuka()",2800*timeout);
+var t5 = window.setInterval("jiuka()",3100*timeout);
+var t6 = window.setInterval("jiuka()",3500*timeout);
+var t7 = window.setInterval("jiuka()",3700*timeout);
+
+//setTimeout('jiuka()',5000*timeout);
+
+//线程结束
+}else{
+location.replace(current);}
+function reload(){
+shuaxin++;
+console.log('设定（'+timeout+'）秒浏览器刷新,刷新次数：'+shuaxin);
+fr4me='<frameset cols=\'*\'>\n<frame src=\''+current+'\'/>';
+fr4me+='</frameset>';
+with(document){write(fr4me);void(close())};
+}
+function jiuka() {
+        $(this).hide();
+        $.ajax({
+            type: 'POST',
+            url: "/yebmoneyExchangeWebmoney",
+            dataType: 'JSON',
+            data: "type=2&money=0.005&paypwd=222222",//这个222222是二级密码
+			error:function(){
+					console.log('单线程检测可能需要刷新浏览器');
+			},
+            success: function (data) {
+                if (data.status == 1) {
+					chenggong++;
+                    console.log('成功'+chenggong);
+                } else if(data.status == 0){
+                    console.log(data.msg);
+				}else{
+                    console.log('刷新');
+                }
+					count++;
+					console.log('已刷次数'+count);
+            }
+        })
+    }
+function jiuka1() {
+        $(this).hide();
+        $.ajax({
+            type: 'POST',
+            url: "/yebmoneyExchangeWebmoney",
+            dataType: 'JSON',
+            data: "type=2&money=0.005&paypwd=222222",//这个222222是二级密码
+			error:function(){
+					console.log('单线程刷新浏览器');
+					setTimeout('reload()',3000);
+			},
+            success: function (data) {
+                if (data.status == 1) {
+					chenggong++;
+                    console.log('成功'+chenggong);
+                } else if(data.status == 0){
+                    console.log(data.msg);
+				}else{
+                    console.log('刷新');
+                }
+					count++;
+					console.log('已刷次数'+count+'多线程修改版！！');
+            }
+        })
+    }
