@@ -11,3 +11,17 @@ var renderFriendList=function(data){
 }
 
 renderFriendList(ary)
+
+
+------------------------------------------------
+
+
+var myScroll = function(){
+    console.log('go myScroll')
+    while(true) {
+      console.log(111)
+    }
+}
+
+window.onscroll = myScroll
+------------------------------------------------
